@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Roman Numeral Converter</title>
+    <style>
+      body {
+        background-color: #ffe6e6;
+      }
+
+      form {
+        margin: 0 auto;
+        width: 320px;
+      }
+
+      label {
+        font-family: garamond, georgia, times, serif;
+        font-size: 1.5em;
+      }
+
+      h2 {
+        font-family: helvetica, arial, verdana, sans-serif;
+        text-align: center;
+      }
+
+      textarea {
+        font-size: 2em;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Convert a number to a Roman Numeral</h2>
+    <form action="">
+      <label for="val">Enter a number: </label>
+      <input type="text" id="val" />
+      <br />
+      <label for="result">Result: </label>
+      <br />
+      <textarea id="result"></textarea>
+    </form>
+    <script>
+      function convertToRoman() {
+        let num = +document.getElementById("val").value;
+        let romanNum = "";
+        let thousands = Math.floor(num / 1000);
+
+        document.getElementById("result").textContent = "";
+
+        num = num - 1000 * thousands;
+
+        for (let i = 0; i < thousands; i++) {
+          romanNum += "M";
+        }
+
+        let hundreds = Math.floor(num / 100);
+
+        if (hundreds === 9) {
+          romanNum += "CM";
+          num -= 900;
+          hundreds -= 9;
+        } else if (hundreds >= 5) {
+          romanNum += "D";
+          num -= 500;
+          hundreds -= 5;
+        } else if (hundreds === 4) {
+          romanNum += "CD";
+          num -= 400;
+          hundreds -= 4;
+        }
+
+        num = num - 100 * hundreds;
+
+        for (let i = 0; i < hundreds; i++) {
+          romanNum += "C";
+        }
+
+        let tens = Math.floor(num / 10);
+
+        if (tens === 9) {
+          romanNum += "XC";
+          num -= 90;
+          tens -= 9;
+        } else if (tens >= 5) {
+          romanNum += "L";
+          num -= 50;
+          tens -= 5;
+        } else if (tens === 4) {
+          romanNum += "XL";
+          num -= 40;
+          tens -= 4;
+        }
+
+        num = num - tens * 10;
+
+        for (let i = 0; i < tens; i++) {
+          romanNum += "X";
+        }
+
+        if (num === 9) {
+          romanNum += "IX";
+          num -= 9;
+        } else if (num >= 5) {
+          romanNum += "V";
+          num -= 5;
+        } else if (num === 4) {
+          romanNum += "IV";
+          num -= 4;
+        }
+
+        for (let i = 0; i < num; i++) {
+          romanNum += "I";
+        }
+
+        document.getElementById("result").textContent = romanNum;
+      }
+
+      document.getElementById("val").addEventListener("keyup", convertToRoman);
+    </script>
+  </body>
+</html>
