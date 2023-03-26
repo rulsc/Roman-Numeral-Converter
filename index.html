@@ -35,7 +35,7 @@
     <h2>Convert a number to a Roman Numeral</h2>
     <form action="">
       <label for="val">Enter a number: </label>
-      <input type="text" id="val" />
+      <input type="number" id="val" />
       <br />
       <label for="result">Result: </label>
       <br />
@@ -47,7 +47,8 @@
         let romanNum = "";
         let thousands = Math.floor(num / 1000);
 
-        document.getElementById("result").textContent = "";
+        const result = document.getElementById("result");
+        result.textContent = "";
 
         num = num - 1000 * thousands;
 
@@ -114,7 +115,7 @@
           romanNum += "I";
         }
 
-        document.getElementById("result").textContent = romanNum;
+        result.textContent = romanNum;
       }
 
       document.getElementById("val").addEventListener("keyup", convertToRoman);
